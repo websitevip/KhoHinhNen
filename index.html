@@ -23,16 +23,19 @@
     .image-wrapper {
       position: relative;
       width: 180px;
+      height: auto;
     }
 
     .wallpaper {
       width: 100%;
+      height: auto;
       border-radius: 12px;
-      border: 2px solid #444;
+      border: 2px solid #555;
       object-fit: cover;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: transform 0.3s;
       cursor: pointer;
+      display: block;
     }
 
     .wallpaper:hover {
@@ -45,7 +48,7 @@
       left: 50%;
       transform: translate(-50%, 20px);
       opacity: 0;
-      background-color: rgba(255,255,255,0.9);
+      background-color: rgba(255, 255, 255, 0.95);
       color: #000;
       border: none;
       padding: 6px 14px;
@@ -65,7 +68,7 @@
 </head>
 <body>
   <div class="container" id="imageContainer">
-    <!-- Ảnh sẽ được tạo bằng JS -->
+    <!-- Ảnh sẽ được thêm bằng JS -->
   </div>
 
   <script src="images.js"></script>
@@ -85,6 +88,7 @@
       btn.textContent = "Lưu";
       btn.className = "save-btn";
 
+      // Nút tải ảnh
       btn.onclick = () => {
         const a = document.createElement("a");
         a.href = link;
@@ -94,13 +98,14 @@
         document.body.removeChild(a);
       };
 
-      wrapper.appendChild(img);
-      wrapper.appendChild(btn);
-      container.appendChild(wrapper);
-
+      // Toggle hiển thị nút
       img.addEventListener("click", () => {
         btn.classList.toggle("show");
       });
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(btn);
+      container.appendChild(wrapper);
     });
   </script>
 </body>
