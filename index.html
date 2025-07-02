@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kho Hình Nền</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #121212;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 180px;
+    }
+
+    .wallpaper {
+      width: 100%;
+      border-radius: 12px;
+      border: 2px solid #444;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .wallpaper:hover {
+      transform: scale(1.05);
+    }
+
+    .save-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      background-color: rgba(255,255,255,0.9);
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .save-btn.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="imageContainer">
+    <!-- Ảnh sẽ được tạo bằng JS -->
+  </div>
+
+  <script src="images.js"></script>
+  <script>
+    const container = document.getElementById("imageContainer");
+
+    imageLinks.forEach(link => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "image-wrapper";
+
+      const img = document.createElement("img");
+      img.src = link;
+      img.alt = "Wallpaper";
+      img.className = "wallpaper";
+
+      const btn = document.createElement("button");
+      btn.textContent = "Lưu";
+      btn.className = "save-btn";
+
+      btn.onclick = () => {
+        const a = document.createElement("a");
+        a.href = link;
+        a.download = link.split('/').pop();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+
+      wrapper.appendChild(img);
+      wrapper.appendChild(btn);
+      container.appendChild(wrapper);
+
+      img.addEventListener("click", () => {
+        btn.classList.toggle("show");
+      });
+    });
+  </script>
+</body>
+</html>
