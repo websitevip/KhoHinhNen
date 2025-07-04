@@ -41,7 +41,7 @@ function loadAppsFromData() {
 
 // Pagination - Chỉ có phân trang đơn giản
 let currentSubPage = 1;
-const appsPerSubPage = 8;
+const appsPerSubPage = 20;
 
 // DOM elements
 const filesGrid = document.getElementById('filesGrid');
